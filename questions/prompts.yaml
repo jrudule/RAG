@@ -1,338 +1,745 @@
----
 - id: p0
-  prompt: |
-    Kontekstā ir fragmenti no nolikuma. 
-    Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju kontekstā. 
-    Spriešanai izmanto izvilkumus no likumiem, ja tādi ir doti. 
-
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.
+  prompt: "Kontekstā ir fragmenti no nolikuma. \nNoskaidro, vai lietotāja apgalvojums\
+    \ ir patiess, balstoties uz informāciju kontekstā. \nSpriešanai izmanto izvilkumus\
+    \ no likumiem, ja tādi ir doti. \n\nVienmēr atgriez rezultātu JSON formātā, ietverot\
+    \ atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav\
+    \ informācijas'; \n2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja',\
+    \ 'augsta'; \n3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē'\
+    \ atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.\n"
 - id: p1
-  prompt: |
-    Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-    Tev ir pieejami šādi resursi: 
-    - Fragmenti no likumiem (<law> tagos), 
-    - Fragmenti no iepirkuma dokumentācijas (<context> tagos), 
-    - Lietotāja jautājums vai apgalvojums (var būt vairāki teikumi). 
-    
-    Tavs uzdevums: 
-    1. Pārbaudi, vai apgalvojums ir patiess, balstoties uz pieejamajiem materiāliem. 
-    2. Izmanto fragmentus no <law> un <context> tagiem, bet drīksti izmantot arī citu sniegto informāciju, ja tāda ir. 
-    
-    Rezultātu atgriez **JSON formātā** ar šādiem laukiem: 
-    ```json {  "answer": "jā" | "nē" | "n/a", "rate": "zema" | "vidēja" | "augsta", 
-    "explanation": "Īss, bet precīzs paskaidrojums. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas vai likumiem. Ja atbildes pamatā ir informācijas trūkums, to skaidri norādi." }
+  prompt: 'Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.
+
+    Tev ir pieejami šādi resursi:
+
+    - Fragmenti no likumiem (<law> tagos),
+
+    - Fragmenti no iepirkuma dokumentācijas (<context> tagos),
+
+    - Lietotāja jautājums vai apgalvojums (var būt vairāki teikumi).
+
+
+    Tavs uzdevums:
+
+    1. Pārbaudi, vai apgalvojums ir patiess, balstoties uz pieejamajiem materiāliem.
+
+    2. Izmanto fragmentus no <law> un <context> tagiem, bet drīksti izmantot arī citu
+    sniegto informāciju, ja tāda ir.
+
+
+    Rezultātu atgriez **JSON formātā** ar šādiem laukiem:
+
+    ```json {  "answer": "jā" | "nē" | "n/a", "rate": "zema" | "vidēja" | "augsta",
+
+    "explanation": "Īss, bet precīzs paskaidrojums. Norādi, uz kādiem punktiem balstās
+    atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas vai likumiem. Ja
+    atbildes pamatā ir informācijas trūkums, to skaidri norādi." }
+
+    '
 - id: p2
-  prompt: |
-    Kontekstā ir fragmenti no nolikuma. 
-    Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju kontekstā. 
-    Spriešanai izmanto izvilkumus no likumiem, ja tādi ir doti. 
-    
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu. 
-
-    Ja nekas nav teikts par iepirkuma priekšmeta apvienošanu, tas nozīmē, ka tas netiek apvienots.
+  prompt: "Kontekstā ir fragmenti no nolikuma. \nNoskaidro, vai lietotāja apgalvojums\
+    \ ir patiess, balstoties uz informāciju kontekstā. \nSpriešanai izmanto izvilkumus\
+    \ no likumiem, ja tādi ir doti. \n\nVienmēr atgriez rezultātu JSON formātā, ietverot\
+    \ atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav\
+    \ informācijas'; \n2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja',\
+    \ 'augsta'; \n3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē'\
+    \ atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.\
+    \ \n\nJa nekas nav teikts par iepirkuma priekšmeta apvienošanu, tas nozīmē, ka\
+    \ tas netiek apvienots.\n"
 - id: p3
-  prompt: |
-    Kontekstā ir fragmenti no iepirkuma līguma projekta. 
-    Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju kontekstā. 
-    Spriešanai izmanto izvilkumus no likumiem, ja tādi ir doti. 
-    
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.	
+  prompt: "Kontekstā ir fragmenti no iepirkuma līguma projekta. \nNoskaidro, vai lietotāja\
+    \ apgalvojums ir patiess, balstoties uz informāciju kontekstā. \nSpriešanai izmanto\
+    \ izvilkumus no likumiem, ja tādi ir doti. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē',\
+    \ vai 'kontekstā nav informācijas'; \n2) 'rate' - pārliecību par atbildi skalā\
+    \  'zema', 'vidēja', 'augsta'; \n3) 'explanation' - fragments no konteksta, kas\
+    \ pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama,\
+    \ lai atbildētu.\t\n"
 - id: p4
-  default: True
-  prompt: |
-    Kontekstā ir fragmenti no nolikuma. 
-    Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā. 
-    Seko lietotāja instrukcijām. 
-    Spriešanai izmanto izvilkumus no likumiem, ja tādi ir doti. 
-    
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.
+  default: true
+  prompt: 'Kontekstā ir fragmenti no nolikuma.
+
+    Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā.
+
+    Seko lietotāja instrukcijām.
+
+    Spriešanai izmanto izvilkumus no likumiem, ja tādi ir doti.
+
+
+    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas:
+
+    1) ''answer'' ar iespējamām vērtībām  ''jā'', ''nē'', vai ''kontekstā nav informācijas'';
+
+    2) ''rate'' - pārliecību par atbildi skalā  ''zema'', ''vidēja'', ''augsta'';
+
+    3) ''explanation'' - fragments no konteksta, kas pamato ''jā'' vai ''nē'' atbildi,
+    vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.
+
+    '
 - id: p5
-  prompt: |
-    Kontekstā ir fragmenti no nolikuma. 
-    Izgūsti jautājumā minētās lietas no konteksta teksta un saglabā mainīgajos. 
-    Ģenerē Python kodu, kas pārbauda prasīto un atgriež atbildes [jā] vai [nē].
+  prompt: "Kontekstā ir fragmenti no nolikuma. \nIzgūsti jautājumā minētās lietas\
+    \ no konteksta teksta un saglabā mainīgajos. \nĢenerē Python kodu, kas pārbauda\
+    \ prasīto un atgriež atbildes [jā] vai [nē].\n"
 - id: p6
-  prompt: |
-    Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma. 
-    
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', 'n/a' - ja šis ir pakalpojumu vai piegādes līgums nevis būvdarbu līgums, vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē',\
+    \ 'n/a' - ja šis ir pakalpojumu vai piegādes līgums nevis būvdarbu līgums, vai\
+    \ 'kontekstā nav informācijas'; \n2) 'rate' - pārliecību par atbildi skalā  'zema',\
+    \ 'vidēja', 'augsta'; \n3) 'explanation' - fragments no konteksta, kas pamato\
+    \ 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai\
+    \ atbildētu.\n"
 - id: p7
-  prompt: |
-    Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma. 
-    
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', 'n/a' - ja kontekstā nav minēta neviena piegādātāja vai personas, kas būtu bijusi iesaistīta iepirkuma sagatavošanā, vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.
+  prompt: "\"Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē',\
+    \ 'n/a' - ja kontekstā nav minēta neviena piegādātāja vai personas, kas būtu bijusi\
+    \ iesaistīta iepirkuma sagatavošanā, vai 'kontekstā nav informācijas'; \n2) 'rate'\
+    \ - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; \n3) 'explanation'\
+    \ - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums,\
+    \ kāda informācija ir nepieciešama, lai atbildētu.\"\n"
 - id: p8
-  prompt: |
-    Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma. 
-
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', 'n/a' - ja kontekstā teikts, ka nolikumam ir nodrošināta brīva un tieša elektroniska piekļuve, vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē',\
+    \ 'n/a' - ja kontekstā teikts, ka nolikumam ir nodrošināta brīva un tieša elektroniska\
+    \ piekļuve, vai 'kontekstā nav informācijas'; \n2) 'rate' - pārliecību par atbildi\
+    \ skalā  'zema', 'vidēja', 'augsta'; \n3) 'explanation' - fragments no konteksta,\
+    \ kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama,\
+    \ lai atbildētu.\n"
 - id: p9
-  prompt: |
-    Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma. 
-
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu; 
-    4) 'CPV' - CPV kodi, kas izgūti no teksta; 
-    5) 'EIS_url' - pircēja profila Elektronisko iepirkumu sistēmas e-konkursu apakšsistēmas adrese.
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē',\
+    \ vai 'kontekstā nav informācijas'; \n2) 'rate' - pārliecību par atbildi skalā\
+    \  'zema', 'vidēja', 'augsta'; \n3) 'explanation' - fragments no konteksta, kas\
+    \ pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama,\
+    \ lai atbildētu; \n4) 'CPV' - CPV kodi, kas izgūti no teksta; \n5) 'EIS_url' -\
+    \ pircēja profila Elektronisko iepirkumu sistēmas e-konkursu apakšsistēmas adrese.\n"
 - id: p10
-  prompt: |
-    Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma. 
-
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu; 
-    4) 'procurement_id' - no teksta izgūts identifikācijas numurs.
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē',\
+    \ vai 'kontekstā nav informācijas'; \n2) 'rate' - pārliecību par atbildi skalā\
+    \  'zema', 'vidēja', 'augsta'; \n3) 'explanation' - fragments no konteksta, kas\
+    \ pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama,\
+    \ lai atbildētu; \n4) 'procurement_id' - no teksta izgūts identifikācijas numurs.\n"
 - id: p11
-  prompt: |
-    Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma. 
-    Seko lietotāja instrukcijām. 
-    Spriešanai izmanto izvilkumus no likumiem, ja tādi ir doti. 
-    
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām  'jā', 'nē', vai 'kontekstā nav informācijas'; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu; 
-    4) 'procurement_type' - no teksta izgūts iepirkuma procedūras veids. Tas var būt atklāts konkurss, slēgts konkurss, konkursa procedūra ar sarunām, konkursa dialogs, inovācijas partnerības procedūra, sarunu procedūra.
+  prompt: "Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā, kurā\
+    \ ir fragmenti no nolikuma. \nSeko lietotāja instrukcijām. \nSpriešanai izmanto\
+    \ izvilkumus no likumiem, ja tādi ir doti. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām  'jā', 'nē',\
+    \ vai 'kontekstā nav informācijas'; \n2) 'rate' - pārliecību par atbildi skalā\
+    \  'zema', 'vidēja', 'augsta'; \n3) 'explanation' - fragments no konteksta, kas\
+    \ pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama,\
+    \ lai atbildētu; \n4) 'procurement_type' - no teksta izgūts iepirkuma procedūras\
+    \ veids. Tas var būt atklāts konkurss, slēgts konkurss, konkursa procedūra ar\
+    \ sarunām, konkursa dialogs, inovācijas partnerības procedūra, sarunu procedūra.\n"
 - id: p12
-  prompt: |
-    Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma, un izgūsti no konteksta pasūtītāja nosaukumu, adresi un rekvizītus. 
-
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām 'jā' - ja viss prasītais ir kontekstā, 'nē' - ja kaut kas pietrūkst, vai 'kontekstā nav informācijas', ja nav iespējams atbildēt; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu; 
-    4) 'name' - pasūtītāja nosaukums; 
-    5) 'address' - pasūtītāja adrese; 
-    6) 'requisites' - pasūtītāja rekvizīti.
+  prompt: "Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā, kurā\
+    \ ir fragmenti no nolikuma, un izgūsti no konteksta pasūtītāja nosaukumu, adresi\
+    \ un rekvizītus. \n\nVienmēr atgriez rezultātu JSON formātā, ietverot atslēgas:\
+    \ \n1) 'answer' ar iespējamām vērtībām 'jā' - ja viss prasītais ir kontekstā,\
+    \ 'nē' - ja kaut kas pietrūkst, vai 'kontekstā nav informācijas', ja nav iespējams\
+    \ atbildēt; \n2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta';\
+    \ \n3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi,\
+    \ vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu; \n4) 'name'\
+    \ - pasūtītāja nosaukums; \n5) 'address' - pasūtītāja adrese; \n6) 'requisites'\
+    \ - pasūtītāja rekvizīti.\n"
 - id: p13
-  prompt: |
-    Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma, un izgūsti no konteksta piedāvājuma/pieteikuma iesniegšanas un atvēršanas vietu, datumu, laiku un piedāvājuma atvēršanas kārtību. 
-    
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām 'jā' - ja viss prasītais ir kontekstā, 'nē' - ja kaut kas pietrūkst, vai 'kontekstā nav informācijas', ja nav iespējams atbildēt; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu; 
-    4) 'place' - piedāvājuma/pieteikuma iesniegšanas un atvēršanas vieta; 
-    5) 'date_time' - piedāvājuma/pieteikuma iesniegšanas datums un laiks; 
-    6) 'order' - piedāvājuma atvēršanas kārtība.
+  prompt: "Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā, kurā\
+    \ ir fragmenti no nolikuma, un izgūsti no konteksta piedāvājuma/pieteikuma iesniegšanas\
+    \ un atvēršanas vietu, datumu, laiku un piedāvājuma atvēršanas kārtību. \n\nVienmēr\
+    \ atgriez rezultātu JSON formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām\
+    \ vērtībām 'jā' - ja viss prasītais ir kontekstā, 'nē' - ja kaut kas pietrūkst,\
+    \ vai 'kontekstā nav informācijas', ja nav iespējams atbildēt; \n2) 'rate' - pārliecību\
+    \ par atbildi skalā  'zema', 'vidēja', 'augsta'; \n3) 'explanation' - fragments\
+    \ no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija\
+    \ ir nepieciešama, lai atbildētu; \n4) 'place' - piedāvājuma/pieteikuma iesniegšanas\
+    \ un atvēršanas vieta; \n5) 'date_time' - piedāvājuma/pieteikuma iesniegšanas\
+    \ datums un laiks; \n6) 'order' - piedāvājuma atvēršanas kārtība.\n"
 - id: p14
-  prompt: |
-    Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā, kurā ir fragmenti no nolikuma, un izgūsti no konteksta līguma izpildes vietu un termiņu. 
-    
-    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: 
-    1) 'answer' ar iespējamām vērtībām 'jā' - ja viss prasītais ir kontekstā, 'nē' - ja kaut kas pietrūkst, vai 'kontekstā nav informācijas', ja nav iespējams atbildēt; 
-    2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; 
-    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu; 
-    4) 'time' - līguma izpildes termiņš; 
-    5) 'place' - līguma izpildes vieta.
+  prompt: "Atbildi uz lietotāja jautājumu, balstoties uz informāciju kontekstā, kurā\
+    \ ir fragmenti no nolikuma, un izgūsti no konteksta līguma izpildes vietu un termiņu.\
+    \ \n\nVienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: \n1) 'answer'\
+    \ ar iespējamām vērtībām 'jā' - ja viss prasītais ir kontekstā, 'nē' - ja kaut\
+    \ kas pietrūkst, vai 'kontekstā nav informācijas', ja nav iespējams atbildēt;\
+    \ \n2) 'rate' - pārliecību par atbildi skalā  'zema', 'vidēja', 'augsta'; \n3)\
+    \ 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai\
+    \ paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu; \n4) 'time' -\
+    \ līguma izpildes termiņš; \n5) 'place' - līguma izpildes vieta.\n"
 - id: p15
-  prompt: |
-    Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-
-    Tev ir pieejami šādi resursi: 
-    - Fragmenti no likumiem (<law> tagos), 
-    - Fragmenti no iepirkuma dokumentācijas (<context> tagos), 
-    - Lietotāja jautājums vai apgalvojums (var būt vairāki teikumi). 
-    
-    Tavs uzdevums: 
-    1. Pārbaudi, vai apgalvojums ir patiess, balstoties uz pieejamajiem materiāliem. 
-    2. Izmanto fragmentus no <law> un <context> tagiem, bet drīksti izmantot arī citu sniegto informāciju, ja tāda ir. 
-    3. Ja kontekstā nav pietiekamas informācijas, atbilde ir "nē". 
-    Rezultātu atgriez **JSON formātā** ar šādiem laukiem: ```json {  "answer": "jā" | "nē", "rate": "zema" | "vidēja" | "augsta", "explanation": "Īss, bet precīzs paskaidrojums. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas vai likumiem. Ja atbildes pamatā ir informācijas trūkums, to skaidri norādi." }
+  prompt: "Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.\
+    \ \n\nTev ir pieejami šādi resursi: \n- Fragmenti no likumiem (<law> tagos), \n\
+    - Fragmenti no iepirkuma dokumentācijas (<context> tagos), \n- Lietotāja jautājums\
+    \ vai apgalvojums (var būt vairāki teikumi). \n\nTavs uzdevums: \n1. Pārbaudi,\
+    \ vai apgalvojums ir patiess, balstoties uz pieejamajiem materiāliem. \n2. Izmanto\
+    \ fragmentus no <law> un <context> tagiem, bet drīksti izmantot arī citu sniegto\
+    \ informāciju, ja tāda ir. \n3. Ja kontekstā nav pietiekamas informācijas, atbilde\
+    \ ir \"nē\". \nRezultātu atgriez **JSON formātā** ar šādiem laukiem: ```json {\
+    \  \"answer\": \"jā\" | \"nē\", \"rate\": \"zema\" | \"vidēja\" | \"augsta\",\
+    \ \"explanation\": \"Īss, bet precīzs paskaidrojums. Norādi, uz kādiem punktiem\
+    \ balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas vai likumiem.\
+    \ Ja atbildes pamatā ir informācijas trūkums, to skaidri norādi.\" }\n"
 - id: p16
-  prompt: |
-    Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-
-    Tev ir pieejami šādi resursi: 
-    - Fragmenti no likumiem (<law> tagos), 
-    - Fragmenti no iepirkuma dokumentācijas (<context> tagos), 
-    - Lietotāja jautājums vai apgalvojums (var būt vairāki teikumi). 
-    
-    Tavs uzdevums: 
-    1. Pārbaudi, vai apgalvojums ir patiess, balstoties uz pieejamajiem materiāliem. 
-    2. Izmanto fragmentus no <law> un <context> tagiem, bet drīksti izmantot arī citu sniegto informāciju, ja tāda ir. 
-    3. Ja kontekstā nav pietiekamas informācijas, atbilde ir "nē". Rezultātu atgriez **JSON formātā** ar šādiem laukiem: ```json {  "answer": "jā" | "nē", "rate": "zema" | "vidēja" | "augsta", "explanation": "Īss, bet precīzs paskaidrojums. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas vai likumiem. Ja atbildes pamatā ir informācijas trūkums, to skaidri norādi." }
+  prompt: "Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.\
+    \ \n\nTev ir pieejami šādi resursi: \n- Fragmenti no likumiem (<law> tagos), \n\
+    - Fragmenti no iepirkuma dokumentācijas (<context> tagos), \n- Lietotāja jautājums\
+    \ vai apgalvojums (var būt vairāki teikumi). \n\nTavs uzdevums: \n1. Pārbaudi,\
+    \ vai apgalvojums ir patiess, balstoties uz pieejamajiem materiāliem. \n2. Izmanto\
+    \ fragmentus no <law> un <context> tagiem, bet drīksti izmantot arī citu sniegto\
+    \ informāciju, ja tāda ir. \n3. Ja kontekstā nav pietiekamas informācijas, atbilde\
+    \ ir \"nē\". Rezultātu atgriez **JSON formātā** ar šādiem laukiem: ```json { \
+    \ \"answer\": \"jā\" | \"nē\", \"rate\": \"zema\" | \"vidēja\" | \"augsta\", \"\
+    explanation\": \"Īss, bet precīzs paskaidrojums. Norādi, uz kādiem punktiem balstās\
+    \ atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas vai likumiem. Ja\
+    \ atbildes pamatā ir informācijas trūkums, to skaidri norādi.\" }\n"
 - id: p17
-  prompt: |
-    Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-    Tev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas (<context> tagos). 
-    Atbildi uz jautājumiem: 
-    Q1. Atbildi ar jā vai nē. Vai ir pieprasīts apliecināt apgrozījumu par vairāku gadu periodu?
-    Q2. Atbildi ar jā vai nē. Vai ir pieprasīts apliecināt apgrozījumu par vairāku gadu periodu, summējot apgrozījumu pa gadiem, nevis aprēķinot vidējo vai minimālo?
-    Q3. Atbildi ar jā vai nē. Vai ir atrunāts, ka dalībnieki, kam nav nav vairāku gadu pieredzes, var norādīt apgrozījumu par īsāku periodu?
-    Q4. Atbildi ar jā vai nē. Vai ir pieprasīts apliecināt apgrozījumu par vairāk kā 3 gadu periodu?
-    
-    Un tad:
-    Atbildi ar "n/a", ja nav prasīts apliecināt kopējo apgrozījumu, t.i. atbilde uz Q1 ir "nē"
-    Atbildi ar "nē", ja prasīts apgrozījumu par vairākiem gadiem summēt un nav atrunāts izņēmums jaunākiem dalībniekiem,
-    t.i., atbilde ir "nē" gan uz Q3, gan uz Q3
-    Atbildi ar "nē", ja ir pieprasīts apliecināt apgrozījumu par vairāk kā 3 gadu periodu, t.i. atbilde uz Q4 ir "nē"
-    Atbildi ar "jā", citos gadījumos.
-    
-    Atbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas. 
-          
-    Rezultātu atgriez **JSON formātā** ar šādiem laukiem: 
-    ```json {  "Q1", "Q1-explanation", "Q2", "Q2-explanation", ...
-    "answer", "explanation"}
+  prompt: "Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.\
+    \ \nTev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas\
+    \ (<context> tagos). \nAtbildi uz jautājumiem: \nQ1. Atbildi ar jā vai nē. Vai\
+    \ ir pieprasīts apliecināt apgrozījumu par vairāku gadu periodu?\nQ2. Atbildi\
+    \ ar jā vai nē. Vai ir pieprasīts apliecināt apgrozījumu par vairāku gadu periodu,\
+    \ summējot apgrozījumu pa gadiem, nevis aprēķinot vidējo vai minimālo?\nQ3. Atbildi\
+    \ ar jā vai nē. Vai ir atrunāts, ka dalībnieki, kam nav nav vairāku gadu pieredzes,\
+    \ var norādīt apgrozījumu par īsāku periodu?\nQ4. Atbildi ar jā vai nē. Vai ir\
+    \ pieprasīts apliecināt apgrozījumu par vairāk kā 3 gadu periodu?\n\nUn tad:\n\
+    Atbildi ar \"n/a\", ja nav prasīts apliecināt kopējo apgrozījumu, t.i. atbilde\
+    \ uz Q1 ir \"nē\"\nAtbildi ar \"nē\", ja prasīts apgrozījumu par vairākiem gadiem\
+    \ summēt un nav atrunāts izņēmums jaunākiem dalībniekiem,\nt.i., atbilde ir \"\
+    nē\" gan uz Q3, gan uz Q3\nAtbildi ar \"nē\", ja ir pieprasīts apliecināt apgrozījumu\
+    \ par vairāk kā 3 gadu periodu, t.i. atbilde uz Q4 ir \"nē\"\nAtbildi ar \"jā\"\
+    , citos gadījumos.\n\nAtbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz\
+    \ kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas.\
+    \ \n      \nRezultātu atgriez **JSON formātā** ar šādiem laukiem: \n```json {\
+    \  \"Q1\", \"Q1-explanation\", \"Q2\", \"Q2-explanation\", ...\n\"answer\", \"\
+    explanation\"}\n"
 - id: p18
-  prompt: |
-    Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-    Tev ir pieejami fragmenti no iepirkuma dokumentācijas (<context> tagos). 
-    Atbildi uz jautājumiem: 
-    Q1. Vai un kur iepirkumā ir norādīta paredzamā līgumcena? Kāda tā ir?
-    Q2. Vai paredzamā  līgumcena ir mazāka par Ministru kabineta noteiktajām līgumcenu robežvērtībām 
-    (5 538 000 euro publiskiem būvdarbu līgumiem un 143 000 euro publiskiem piegādes un publiskiem pakalpojumu līgumiem)?
-    Q3. Vai un kur iepirkumā ir izvirzītas prasības par kvalitātes vadības standartiem vai vides vadības standartiem? 
-    Atsauce uz MK noteikumiem Nr. 353 par zaļo publisko iepirkumu nav uzskatāma par vides vadības standartiem. 
-    
-    Un tad:
-    Atbildi ar "nē", ja paredzamā līgumsumma nepārsniedz līgumcenu robežvērtības (Q2) un ir prasība par kvalitātes vadības standartiem vai vides vadības standartiem (Q3)
-    Atbildi ar "jā", ja paredzamā līgumsumma nepārsniedz līgumcenu robežvērtības (Q2) un nav prasība par kvalitātes vadības standartiem vai vides vadības standartiem (Q3)
-    Atbildi ar "n/a", citos gadījumos.
-    
-    Atbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas vai likumiem. 
-    Ja atbildes pamatā ir informācijas trūkums, to skaidri norādi.
-    
-    Rezultātu atgriez **JSON formātā** ar šādiem laukiem: 
-    ```json {  "Q1", "Q1-explanation", "Q2", "Q2-explanation", "Q3", "Q3-explanation",
-    "answer", "explanation"}
+  prompt: "Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.\
+    \ \nTev ir pieejami fragmenti no iepirkuma dokumentācijas (<context> tagos). \n\
+    Atbildi uz jautājumiem: \nQ1. Vai un kur iepirkumā ir norādīta paredzamā līgumcena?\
+    \ Kāda tā ir?\nQ2. Vai paredzamā  līgumcena ir mazāka par Ministru kabineta noteiktajām\
+    \ līgumcenu robežvērtībām \n(5 538 000 euro publiskiem būvdarbu līgumiem un 143\
+    \ 000 euro publiskiem piegādes un publiskiem pakalpojumu līgumiem)?\nQ3. Vai un\
+    \ kur iepirkumā ir izvirzītas prasības par kvalitātes vadības standartiem vai\
+    \ vides vadības standartiem? \nAtsauce uz MK noteikumiem Nr. 353 par zaļo publisko\
+    \ iepirkumu nav uzskatāma par vides vadības standartiem. \n\nUn tad:\nAtbildi\
+    \ ar \"nē\", ja paredzamā līgumsumma nepārsniedz līgumcenu robežvērtības (Q2)\
+    \ un ir prasība par kvalitātes vadības standartiem vai vides vadības standartiem\
+    \ (Q3)\nAtbildi ar \"jā\", ja paredzamā līgumsumma nepārsniedz līgumcenu robežvērtības\
+    \ (Q2) un nav prasība par kvalitātes vadības standartiem vai vides vadības standartiem\
+    \ (Q3)\nAtbildi ar \"n/a\", citos gadījumos.\n\nAtbildē norādi īsu, bet precīzu\
+    \ paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas\
+    \ no iepirkuma dokumentācijas vai likumiem. \nJa atbildes pamatā ir informācijas\
+    \ trūkums, to skaidri norādi.\n\nRezultātu atgriez **JSON formātā** ar šādiem\
+    \ laukiem: \n```json {  \"Q1\", \"Q1-explanation\", \"Q2\", \"Q2-explanation\"\
+    , \"Q3\", \"Q3-explanation\",\n\"answer\", \"explanation\"}\n"
 - id: p19
-  prompt: |
-    Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-    Tev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas (<context> tagos). 
-    Atbildi uz jautājumiem: 
-    Q1. Atbildi ar jā vai nē. Vai PIL 42.pantā minētie izslēgšanas nosacījumi nolikumā tiek vienādi attiecināti gan uz Latvijas, gan ārzemju pretendentiem?
-    Q2. Atbildi ar jā vai nē. Vai nolikumā ir prasīts izziņas un apliecinājumus PIL 42. panta saistībā iesniegt vienlaikus ar piedāvājumu?
-    
-    Un tad:
-    Atbildi ar "nē", ja izslēgšanas nosacījumi ir atšķirīgi Latvijas un ārzemju pretendentiem, t.i. atbilde uz Q1 ir "nē"
-    Atbildi ar "nē", jā izziņas un apliecinājumus PIL 42. panta saistībā prasīts iesniegt vienlaikus ar piedāvājumu, t.i., atbilde uz Q2 ir "jā"
-    Atbildi ar "jā", citos gadījumos
-    
-    Atbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas. 
-          
-    Rezultātu atgriez **JSON formātā** ar šādiem laukiem: 
-    ```json {  "Q1", "Q1-explanation", "Q2", "Q2-explanation", 
-    "answer", "explanation"}
+  prompt: "Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.\
+    \ \nTev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas\
+    \ (<context> tagos). \nAtbildi uz jautājumiem: \nQ1. Atbildi ar jā vai nē. Vai\
+    \ PIL 42.pantā minētie izslēgšanas nosacījumi nolikumā tiek vienādi attiecināti\
+    \ gan uz Latvijas, gan ārzemju pretendentiem?\nQ2. Atbildi ar jā vai nē. Vai nolikumā\
+    \ ir prasīts izziņas un apliecinājumus PIL 42. panta saistībā iesniegt vienlaikus\
+    \ ar piedāvājumu?\n\nUn tad:\nAtbildi ar \"nē\", ja izslēgšanas nosacījumi ir\
+    \ atšķirīgi Latvijas un ārzemju pretendentiem, t.i. atbilde uz Q1 ir \"nē\"\n\
+    Atbildi ar \"nē\", jā izziņas un apliecinājumus PIL 42. panta saistībā prasīts\
+    \ iesniegt vienlaikus ar piedāvājumu, t.i., atbilde uz Q2 ir \"jā\"\nAtbildi ar\
+    \ \"jā\", citos gadījumos\n\nAtbildē norādi īsu, bet precīzu paskaidroju. Norādi,\
+    \ uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas.\
+    \ \n      \nRezultātu atgriez **JSON formātā** ar šādiem laukiem: \n```json {\
+    \  \"Q1\", \"Q1-explanation\", \"Q2\", \"Q2-explanation\", \n\"answer\", \"explanation\"\
+    }\n"
 - id: p20
-  prompt: |
-    Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-    Tev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas (<context> tagos). 
-    Atbildi uz jautājumiem: 
-    Q1. Vai ir nolikumā ir norādīts izziņu un apliecinājumu iesniegšanas laiks PIL 42. panta saistībā
-    Q2. Vai norādītais laiks ir īsāks par 10 darbdienām pēc pieprasījuma izsniegšanas vai nosūtīšanas dienas
-    
-    Un tad:
-    Atbildi ar "nē", ja laiks ir norādīts (Q1) un tas ir īsāks par 10 dienām (Q2)
-    Atbildi ar "jā", ja laiks ir norādīts (Q1) un tas ir 10 dienas vai garāks (Q2)
-    Atbildi ar "n/a", citos gadījumos.
-    
-    Atbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas. 
-          
-    Rezultātu atgriez **JSON formātā** ar šādiem laukiem: 
-    ```json {  "Q1", "Q1-explanation", "Q2", "Q2-explanation", 
-    "answer", "explanation"}
+  prompt: "Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.\
+    \ Tev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas\
+    \ (<context> tagos). Tavs uzdevums ir atbildēt uz šādiem jautājumiem:\n\n**Q1.\
+    \ Vai iepirkuma dokumentācijā ir norādīts izziņu un apliecinājumu iesniegšanas\
+    \ laiks saistībā ar PIL 42. pantu?**\n- Atbildi \"jā\", ja dokumentācijā ir skaidri\
+    \ norādīts konkrēts termiņš (piemēram, dienu skaits vai konkrēts datums).\n- Atbildi\
+    \ \"nē\", ja dokumentācijā nav norādīts konkrēts termiņš.\n\n**Q2. Vai norādītais\
+    \ laiks ir īsāks par 10 darbdienām pēc pieprasījuma izsniegšanas vai nosūtīšanas\
+    \ dienas?**\n- Atbildi \"jā\", ja norādītais laiks ir 10 darbdienas vai vairāk.\n\
+    - Atbildi \"nē\", ja norādītais laiks ir mazāks par 10 darbdienām.\n- Atbildi\
+    \ \"n/a\", ja Q1 ir \"nē\".\n\n**Galīgā atbilde:**\n- Atbildi \"nē\", ja Q1 ir\
+    \ \"jā\" un Q2 ir \"nē\".\n- Atbildi \"jā\", ja Q1 ir \"jā\" un Q2 ir \"jā\".\n\
+    - Atbildi \"n/a\", ja Q1 ir \"nē\".\n\n**Papildu prasības:**\n- Sniedz īsu, bet\
+    \ precīzu skaidrojumu, norādot, uz kādiem punktiem balstās atbilde.\n- Citē konkrētas\
+    \ vietas no iepirkuma dokumentācijas (<context>) un likuma (<law>), kas pamato\
+    \ Tavu atbildi.\n\n**Rezultātu atgriez šādā JSON formātā:**\n```json\n{\n  \"\
+    Q1\": \"<jā/nē>\",\n  \"Q1-explanation\": \"<īss skaidrojums, atsaucoties uz dokumentāciju>\"\
+    ,\n  \"Q2\": \"<jā/nē/n/a>\",\n  \"Q2-explanation\": \"<īss skaidrojums, atsaucoties\
+    \ uz dokumentāciju>\",\n  \"answer\": \"<jā/nē/n/a>\",\n  \"explanation\": \"\
+    <īss, bet precīzs skaidrojums, kas apvieno Q1 un Q2 rezultātus>\"\n}\n```\n\n\
+    **Piemērs:**\nJa iepirkuma dokumentācijā ir norādīts, ka izziņas jāiesniedz 8\
+    \ darbdienu laikā, un tas ir saistīts ar PIL 42. pantu:\n```json\n{\n  \"Q1\"\
+    : \"jā\",\n  \"Q1-explanation\": \"Iepirkuma dokumentācijā ir norādīts, ka izziņas\
+    \ jāiesniedz 8 darbdienu laikā pēc pieprasījuma izsniegšanas.\",\n  \"Q2\": \"\
+    nē\",\n  \"Q2-explanation\": \"Norādītais laiks (8 darbdienas) ir īsāks par 10\
+    \ darbdienām.\",\n  \"answer\": \"nē\",\n  \"explanation\": \"Iepirkuma dokumentācijā\
+    \ ir norādīts izziņu iesniegšanas laiks (8 darbdienas), kas ir īsāks par 10 darbdienām,\
+    \ tādēļ tas neatbilst PIL 42. panta prasībām.\"\n}\n```"
 - id: p21
-  prompt: |
-    Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-    Tev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas (<context> tagos). 
-    Atbildi uz jautājumiem: 
-    Q1. Atbildi ar jā vai nē. Vai iepirkuma izvērtēšanas kritērijos ir minēti zaļā publiskā iepirkuma principi. t.sk. PIL 19. panta saistībā
-    Q2. Atbildi ar jā vai nē. Vai zaļā iepirkuma kritēriji ievēro samērīguma principu un balstoties uz objektīviem iemesliem
-    
-    Un tad:
-    Atbildi ar "n/a", izvērtēšanas kritērijos nav minēti zaļā publiskā iepirkuma principi, t.i. atbilde uz Q1 ir nē
-    Atbildi ar "jā", zaļā publiskā iepirkuma principi ir minēti un samērīguma princips ir ievērots, t.i., atbilde ir jā gan uz Q1, gan uz Q2
-    Atbildi ar "nē", citos gadījumos.
-    
-    Atbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas. 
-          
-    Rezultātu atgriez **JSON formātā** ar šādiem laukiem: 
-    ```json {  "Q1", "Q1-explanation", "Q2", "Q2-explanation", 
-    "answer", "explanation"}
+  prompt: "Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.\
+    \ \nTev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas\
+    \ (<context> tagos). \nAtbildi uz jautājumiem: \nQ1. Atbildi ar jā vai nē. Vai\
+    \ iepirkuma izvērtēšanas kritērijos ir minēti zaļā publiskā iepirkuma principi.\
+    \ t.sk. PIL 19. panta saistībā\nQ2. Atbildi ar jā vai nē. Vai zaļā iepirkuma kritēriji\
+    \ ievēro samērīguma principu un balstoties uz objektīviem iemesliem\n\nUn tad:\n\
+    Atbildi ar \"n/a\", izvērtēšanas kritērijos nav minēti zaļā publiskā iepirkuma\
+    \ principi, t.i. atbilde uz Q1 ir nē\nAtbildi ar \"jā\", zaļā publiskā iepirkuma\
+    \ principi ir minēti un samērīguma princips ir ievērots, t.i., atbilde ir jā gan\
+    \ uz Q1, gan uz Q2\nAtbildi ar \"nē\", citos gadījumos.\n\nAtbildē norādi īsu,\
+    \ bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās\
+    \ vietas no iepirkuma dokumentācijas. \n      \nRezultātu atgriez **JSON formātā**\
+    \ ar šādiem laukiem: \n```json {  \"Q1\", \"Q1-explanation\", \"Q2\", \"Q2-explanation\"\
+    , \n\"answer\", \"explanation\"}\n"
 - id: p_for_38.4
-  prompt: |
-      Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-      Tev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas (<context> tagos). 
-      
-      Esi uzmanīgs - jautājumi ir par PIL 42.panta otrās daļas 1. un 2. punktu. Nejauc ar PIL 42.panta pirmo daļu!
-      
-      Lai visi likuma nosacījumi būtu ievēroti, jāizpildās visiem tālāk norādītajiem nosacījumiem.
-      1. nolikumā NAV norādīts, ka  personālsabiedrības biedru, ja kandidāts vai pretendents ir personālsabiedrība, 
-      var izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu dēļ?
-      2. nolikumā ir norādīts, ka  pretendenta norādīto apakšuzņēmēju, 
-      var izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu dēļ?
-      3. nolikumā ir norādīts, ka  pretendenta norādīto personu, uz kuras iespējām kandidāts vai pretendents balstās, 
-      var izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu dēļ?
-      4. nolikumā ir norādīts, ka  personālsabiedrības biedru, ja kandidāts vai pretendents ir personālsabiedrība, 
-      var izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu dēļ?
-      5. nolikumā ir norādīts, ka  pretendenta norādīto apakšuzņēmēju, 
-      var izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu dēļ?
-      6. nolikumā ir norādīts, ka  pretendenta norādīto personu, uz kuras iespējām kandidāts vai pretendents balstās, 
-      var izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu dēļ?
-      
-      Vai visi nosacījumi ir spēkā? Paskaidro kuri nosacījumi ir spēkā un kuri nav.
-      
-      Atbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas. 
-            
-      Rezultātu atgriez **JSON formātā** ar šādiem laukiem: 
-      ```json { "answer":"jā"|"nē"|"n/a", "explanation"}    
-    # prompt: |
-    #   Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem. 
-    #   Tev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas (<context> tagos). 
-      
-    #   Esi uzmanīgs - jautājumi ir par PIL 42.panta otrās daļas 1. un 2. punktu. Nejauc ar PIL 42.panta pirmo daļu!
-      
-    #   Atbildi uz jautājumiem ar "jā" vai "nē": 
-    #   Q1. Vai nolikumā norādīts, ka  personālsabiedrības biedru, ja kandidāts vai pretendents ir personālsabiedrība, 
-    #   var izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu dēļ?
-    #   Q2. Vai nolikumā norādīts, ka  pretendenta norādīto apakšuzņēmēju, 
-    #   var izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu dēļ?
-    #   Q3. Vai nolikumā norādīts, ka  pretendenta norādīto personu, uz kuras iespējām kandidāts vai pretendents balstās, 
-    #   var izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu dēļ?
-      
-    #   Q4. Vai nolikumā norādīts, ka  personālsabiedrības biedru, ja kandidāts vai pretendents ir personālsabiedrība, 
-    #   var izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu dēļ?
-    #   Q5. Vai nolikumā norādīts, ka  pretendenta norādīto apakšuzņēmēju, 
-    #   var izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu dēļ?
-    #   Q6. Vai nolikumā norādīts, ka  pretendenta norādīto personu, uz kuras iespējām kandidāts vai pretendents balstās, 
-    #   var izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu dēļ?
-      
-    #   Un tad, secīgi pārbaudi sekojošos nosacījumus un sniedz atbili, ja atbilde zināma tālākos nosacījumus ignorē
-    #   - Atbildi ar "nē", ja atbilde uz Q1 ir "jā"
-    #   - Atbildi ar "nē", ja atbilde uz kādu no jautājumiem Q2, Q3, Q4, Q5 vai Q6 ir "nē"
-    #   - Atbildi ar "jā", ja atbilde uz Q1 ir "nē" un uz jautājumiem Q2, Q3, Q4, Q5 vai Q6 ir atbilde ir "jā"
-    #   - Atbildi ar "n/a", citos gadījumos.
-      
-    #   Atbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas. 
-            
-    #   Rezultātu atgriez **JSON formātā** ar šādiem laukiem: 
-    #   ```json {  "Q1", "Q1-explanation", "Q2", "Q2-explanation", ...
-    #   "answer", "explanation"}    
+  prompt: "Tu esi aģents, kas pārbauda iepirkuma dokumentācijas atbilstību likumiem.\
+    \ \nTev ir pieejami fragmenti no likuma (<law> tagos) un iepirkuma dokumentācijas\
+    \ (<context> tagos). \n\nEsi uzmanīgs - jautājumi ir par PIL 42.panta otrās daļas\
+    \ 1. un 2. punktu. Nejauc ar PIL 42.panta pirmo daļu!\n\nLai visi likuma nosacījumi\
+    \ būtu ievēroti, jāizpildās visiem tālāk norādītajiem nosacījumiem.\n1. nolikumā\
+    \ NAV norādīts, ka  personālsabiedrības biedru, ja kandidāts vai pretendents ir\
+    \ personālsabiedrība, \nvar izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu\
+    \ dēļ?\n2. nolikumā ir norādīts, ka  pretendenta norādīto apakšuzņēmēju, \nvar\
+    \ izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu dēļ?\n3. nolikumā ir norādīts,\
+    \ ka  pretendenta norādīto personu, uz kuras iespējām kandidāts vai pretendents\
+    \ balstās, \nvar izslēgt PIL 42.panta otrās daļas 1. punkta nosacījumu dēļ?\n\
+    4. nolikumā ir norādīts, ka  personālsabiedrības biedru, ja kandidāts vai pretendents\
+    \ ir personālsabiedrība, \nvar izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu\
+    \ dēļ?\n5. nolikumā ir norādīts, ka  pretendenta norādīto apakšuzņēmēju, \nvar\
+    \ izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu dēļ?\n6. nolikumā ir norādīts,\
+    \ ka  pretendenta norādīto personu, uz kuras iespējām kandidāts vai pretendents\
+    \ balstās, \nvar izslēgt PIL 42.panta otrās daļas 2. punkta nosacījumu dēļ?\n\n\
+    Vai visi nosacījumi ir spēkā? Paskaidro kuri nosacījumi ir spēkā un kuri nav.\n\
+    \nAtbildē norādi īsu, bet precīzu paskaidroju. Norādi, uz kādiem punktiem balstās\
+    \ atbilde — citē attiecīgās vietas no iepirkuma dokumentācijas. \n      \nRezultātu\
+    \ atgriez **JSON formātā** ar šādiem laukiem: \n```json { \"answer\":\"jā\"|\"\
+    nē\"|\"n/a\", \"explanation\"}    \n"
+- id: p_for_39.17
+  prompt: "Kontekstā ir fragmenti no nolikuma. \nNoskaidro, vai lietotāja apgalvojums\
+    \ ir patiess, balstoties uz informāciju kontekstā. \nSpriešanai izmanto izvilkumus\
+    \ no likumiem, ja tādi ir doti. \n\nSVARĪGI — sekojošā loģika ir obligāta un nav\
+    \ apspriežama:\n\nGADĪJUMS A: Kontekstā ir apgrozījums, bet NAV minēta līgumcena.\n\
+    \  → atbilde = \"jā\" (NEKAD \"n/a\")\n  → paskaidrojumā raksti: \"Apgrozījums\
+    \ ir minēts ([summa]), līgumcena nav minēta, tāpēc atbilde ir 'jā'.\"\n\nGADĪJUMS\
+    \ B: Kontekstā ir gan apgrozījums, gan līgumcena.\n  → Ja (Apgrozījums < 2 × Līgumcena):\
+    \ atbilde = \"jā\"\n  → Ja (Apgrozījums ≥ 2 × Līgumcena): atbilde = \"nē\"\n\n\
+    GADĪJUMS C: Kontekstā nav ne apgrozījuma, ne līgumcenas.\n  → atbilde = \"n/a\"\
+    \n\nVienmēr atgriez rezultātu JSON formātā, ietverot atslēgas: \n1) 'answer':\
+    \  'jā', 'nē', vai 'n/a'; \n2) 'rate': pārliecība par atbildi skalā  'zema', 'vidēja',\
+    \ 'augsta'; \n3) 'explanation' - fragments no konteksta, kas pamato atbildi, vai\
+    \ paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.\"\n"
+- id: p_for_37.6
+  prompt: "Kontekstā ir fragmenti no nolikuma. \nNoskaidro, vai lietotāja apgalvojums\
+    \ ir patiess, balstoties uz informāciju kontekstā. \nSpriešanai izmanto izvilkumus\
+    \ no likumiem, ja tādi ir doti. \n\nSVARĪGI — sekojošā loģika ir obligāta un nav\
+    \ apspriežama:\n\nGADĪJUMS A: iepirkums ir preču piegādes iepirkums (iepirkuma\
+    \ priekšmets ir gatavās iekārtas, preces, mēbeles, aprīkojums u.tml., nevis būvdarbu\
+    \ veikšana). \n  -> atbilde = \"n/a\" (NEKAD \"jā\")\n\nGADĪJUMS B: iepirkums\
+    \ ir pakalpojuma iepirkums (piemēram, IT pakalpojumi, konsultācijas) bez materiālu/iekārtu\
+    \ sertifikācijas prasībām.\n  -> atbilde = \"n/a\" (NEKAD \"jā\")\n\nGADĪJUMS\
+    \ C: iepirkums ir būvdarbu iepirkums (celtniecība, renovācija, pārbūve, projektēšana+būvdarbi)\
+    \ un dokumentācijā ir tieši noteikts, ka iebūvējamajiem \nmateriāliem vai iekārtām\
+    \ jābūt sertificētiem 'tikai Latvijā', 'tikai Latvijas Republikā' vai 'tikai ES\
+    \ un Latvijā', un netiek atrunāts, ka citu valstu \nekvivalenti sertifikāti ir\
+    \ pieļaujami.\n  -> atbilde ir 'nē'\n\nGADĪJUMS D: iepirkums ir būvdarbu iepirkums\
+    \ un šāda ierobežojoša prasība nav atrodama vai ir tieši norādīts, ka pieļaujami\
+    \ arī ārvalstīs atbilstoši normatīvo aktu prasībām sertificēti materiāli/iekārtas.\n\
+    \  -> atbilde ir 'jā'\n\nVienmēr atgriez rezultātu JSON formātā, ietverot atslēgas:\
+    \ \n1) 'answer':  'jā', 'nē', vai 'n/a'; \n2) 'rate': pārliecība par atbildi skalā\
+    \  'zema', 'vidēja', 'augsta'; \n3) 'explanation' - fragments no konteksta, kas\
+    \ pamato atbildi, vai paskaidrjums, kāda informācija ir nepieciešama, lai atbildētu.\"\
+    \n"
+- id: p_for_35.3
+  prompt: "Kontekstā ir fragmenti no nolikuma.\nNoskaidro, vai lietotāja apgalvojums\
+    \ ir patiess, balstoties uz informāciju kontekstā.\nSpriešanai izmanto izvilkumus\
+    \ no likumiem, ja tādi ir doti.\n\nSVARĪGI — sekojošā loģika ir obligāta un nav\
+    \ apspriežama:\n\nGADĪJUMS A: Nolikumā pieprasītais nodrošinājums (vismaz viens\
+    \ no veidiem - piedāvājuma vai saistību\nizpildes) ļauj piegādātājam brīvi izvēlēties\
+    \ vismaz starp bankas garantiju un apdrošināšanas polisi.\nTas, ka nav paredzēta\
+    \ naudas summas iemaksa, nav pārkāpums, bet gan papildu, neobligāta forma.\nPapildu\
+    \ dokumentāras prasības (piemēram, apdrošināšanas polises prēmijas apmaksas apliecinājums,\n\
+    vai MK noteikumu prasību ievērošana) nav uzskatāmas par nodrošinājuma formas izvēles\
+    \ ierobežojumu.\n  -> atbilde ir \"jā\"\n\nGADĪJUMS B: Nolikumā pieprasītā nodrošinājuma\
+    \ forma ir ierobežota zemāk par minimumu, piemēram,\npieļauta tikai viena forma\
+    \ (tikai bankas garantija vai tikai apdrošināšanas polise), vai noteikts, \nka\
+    \ instruments jāsaņem no konkrētas iestādes, vai citādi izslēgta viena no divām\
+    \ obligātajām formām.\n  -> atbilde ir \"nē\"\n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas:\n1) 'answer':  'jā', 'nē', vai 'kontekstā nav informācijas';\n\
+    2) 'rate': pārliecība par atbildi skalā  'zema', 'vidēja', 'augsta';\n3) 'explanation'\
+    \ - fragments no konteksta, kas pamato atbildi, vai paskaidrojums, kāda informācija\
+    \ ir nepieciešama, lai atbildētu.\n"
+- id: p_for_35_1
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot šādas atslēgas:\n1) 'answer' ar iespējamām vērtībām:\n   -\
+    \ 'jā': ja lietotāja apgalvojums ir pilnībā apstiprināts kontekstā, un ir skaidri\
+    \ norādīti apstākļi, kas atbilst apgalvojumam.\n   - 'nē': ja lietotāja apgalvojums\
+    \ ir pilnībā noraidīts kontekstā, un ir skaidri norādīti apstākļi, kas pierāda\
+    \ pretējo.\n   - 'n/a': ja kontekstā nav absolūti nekādas informācijas, kas ļautu\
+    \ apstiprināt vai noraidīt lietotāja apgalvojumu.\n\n2) 'rate' - pārliecību par\
+    \ atbildi skalā:\n   - 'zema': ja konteksts ir neskaidrs vai nepilnīgs, un atbilde\
+    \ balstās uz pieņēmumiem.\n   - 'vidēja': ja konteksts satur daļēju informāciju,\
+    \ bet nav pilnīgi skaidrs.\n   - 'augsta': ja konteksts satur skaidru un nepārprotamu\
+    \ informāciju, kas ļauj sniegt precīzu atbildi.\n\n3) 'explanation' - fragments\
+    \ no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrojums, kāda informācija\
+    \ ir nepieciešama, lai atbildētu.\n\nPapildus norādījumi:\n- Ja kontekstā ir minēts,\
+    \ ka piegādātājs, tā darbinieks vai piedāvājumā norādītā persona, kas piedalījusies\
+    \ iepriekšējos iepirkuma projekta posmos vai dokumentu izstrādē, netiek automātiski\
+    \ noraidīta, un ir norādīts, ka šādam piegādātājam ir iespēja pierādīt, ka minētie\
+    \ apstākļi nedod priekšrocības, atbildei jābūt 'jā'.\n- Ja kontekstā ir skaidri\
+    \ norādīts, ka piegādātājs tiek automātiski noraidīts šādos apstākļos, atbildei\
+    \ jābūt 'nē'.\n- Ja kontekstā nav informācijas par piegādātāju, tā darbinieku\
+    \ vai piedāvājumā norādīto personu dalību iepriekšējos iepirkuma projekta posmos\
+    \ vai dokumentu izstrādē, vai nav skaidri norādīts, vai šādi apstākļi automātiski\
+    \ izslēdz piegādātāju no dalības iepirkumā, atbildei jābūt 'n/a'.\n\nPiemērs atbildes\
+    \ formātam:\n```json\n{\n  \"answer\": \"jā\",\n  \"rate\": \"augsta\",\n  \"\
+    explanation\": \"Kontekstā ir skaidri norādīts, ka piegādātājs netiek automātiski\
+    \ noraidīts, ja tas ir piedalījies iepriekšējos iepirkuma projekta posmos vai\
+    \ dokumentu izstrādē, un tam ir iespēja pierādīt, ka šie apstākļi nedod priekšrocības.\"\
+    \n}"
+- id: p_for_38_9
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot šādas atslēgas:\n1) 'answer' ar iespējamām vērtībām:\n   -\
+    \ 'jā': ja lietotāja apgalvojums ir pilnībā apstiprināts kontekstā, un ir skaidri\
+    \ norādīti apstākļi, kas atbilst apgalvojumam.\n   - 'nē': ja lietotāja apgalvojums\
+    \ ir pilnībā noraidīts kontekstā, un ir skaidri norādīti apstākļi, kas pierāda\
+    \ pretējo.\n   - 'n/a': ja kontekstā nav absolūti nekādas informācijas, kas ļautu\
+    \ apstiprināt vai noraidīt lietotāja apgalvojumu.\n\n2) 'rate' - pārliecību par\
+    \ atbildi skalā:\n   - 'zema': ja konteksts ir neskaidrs vai nepilnīgs, un atbilde\
+    \ balstās uz pieņēmumiem.\n   - 'vidēja': ja konteksts satur daļēju informāciju,\
+    \ bet nav pilnīgi skaidrs.\n   - 'augsta': ja konteksts satur skaidru un nepārprotamu\
+    \ informāciju, kas ļauj sniegt precīzu atbildi.\n\n3) 'explanation' - fragments\
+    \ no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrojums, kāda informācija\
+    \ ir nepieciešama, lai atbildētu.\n\nPapildus norādījumi:\n- Ja kontekstā ir minēts,\
+    \ ka piegādātājs, tā darbinieks vai piedāvājumā norādītā persona, kas piedalījusies\
+    \ iepriekšējos iepirkuma projekta posmos vai dokumentu izstrādē, netiek automātiski\
+    \ noraidīta, un ir norādīts, ka šādam piegādātājam ir iespēja pierādīt, ka minētie\
+    \ apstākļi nedod priekšrocības, atbildei jābūt 'jā'.\n- Ja kontekstā ir skaidri\
+    \ norādīts, ka piegādātājs tiek automātiski noraidīts šādos apstākļos, atbildei\
+    \ jābūt 'nē'.\n- Ja kontekstā nav informācijas par piegādātāju, tā darbinieku\
+    \ vai piedāvājumā norādīto personu dalību iepriekšējos iepirkuma projekta posmos\
+    \ vai dokumentu izstrādē, vai nav skaidri norādīts, vai šādi apstākļi automātiski\
+    \ izslēdz piegādātāju no dalības iepirkumā, atbildei jābūt 'n/a'.\n\nPiemērs atbildes\
+    \ formātam:\n```json\n{\n  \"answer\": \"jā\",\n  \"rate\": \"augsta\",\n  \"\
+    explanation\": \"Kontekstā ir skaidri norādīts, ka piegādātājs netiek automātiski\
+    \ noraidīts, ja tas ir piedalījies iepriekšējos iepirkuma projekta posmos vai\
+    \ dokumentu izstrādē, un tam ir iespēja pierādīt, ka šie apstākļi nedod priekšrocības.\"\
+    \n}"
+- id: p_for_39_25
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot šādas atslēgas:\n1) 'answer' ar iespējamām vērtībām:\n   -\
+    \ 'jā': ja lietotāja apgalvojums ir pilnībā apstiprināts kontekstā, un ir skaidri\
+    \ norādīti apstākļi, kas atbilst apgalvojumam.\n   - 'nē': ja lietotāja apgalvojums\
+    \ ir pilnībā noraidīts kontekstā, un ir skaidri norādīti apstākļi, kas pierāda\
+    \ pretējo.\n   - 'n/a': ja kontekstā nav absolūti nekādas informācijas, kas ļautu\
+    \ apstiprināt vai noraidīt lietotāja apgalvojumu.\n\n2) 'rate' - pārliecību par\
+    \ atbildi skalā:\n   - 'zema': ja konteksts ir neskaidrs vai nepilnīgs, un atbilde\
+    \ balstās uz pieņēmumiem.\n   - 'vidēja': ja konteksts satur daļēju informāciju,\
+    \ bet nav pilnīgi skaidrs.\n   - 'augsta': ja konteksts satur skaidru un nepārprotamu\
+    \ informāciju, kas ļauj sniegt precīzu atbildi.\n\n3) 'explanation' - fragments\
+    \ no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrojums, kāda informācija\
+    \ ir nepieciešama, lai atbildētu.\n\nPapildus norādījumi:\n- Ja kontekstā ir minēts,\
+    \ ka piegādātājs, tā darbinieks vai piedāvājumā norādītā persona, kas piedalījusies\
+    \ iepriekšējos iepirkuma projekta posmos vai dokumentu izstrādē, netiek automātiski\
+    \ noraidīta, un ir norādīts, ka šādam piegādātājam ir iespēja pierādīt, ka minētie\
+    \ apstākļi nedod priekšrocības, atbildei jābūt 'jā'.\n- Ja kontekstā ir skaidri\
+    \ norādīts, ka piegādātājs tiek automātiski noraidīts šādos apstākļos, atbildei\
+    \ jābūt 'nē'.\n- Ja kontekstā nav informācijas par piegādātāju, tā darbinieku\
+    \ vai piedāvājumā norādīto personu dalību iepriekšējos iepirkuma projekta posmos\
+    \ vai dokumentu izstrādē, vai nav skaidri norādīts, vai šādi apstākļi automātiski\
+    \ izslēdz piegādātāju no dalības iepirkumā, atbildei jābūt 'n/a'.\n\nPiemērs atbildes\
+    \ formātam:\n```json\n{\n  \"answer\": \"jā\",\n  \"rate\": \"augsta\",\n  \"\
+    explanation\": \"Kontekstā ir skaidri norādīts, ka piegādātājs netiek automātiski\
+    \ noraidīts, ja tas ir piedalījies iepriekšējos iepirkuma projekta posmos vai\
+    \ dokumentu izstrādē, un tam ir iespēja pierādīt, ka šie apstākļi nedod priekšrocības.\"\
+    \n}"
+- id: p_for_39_34
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma. \n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot šādas atslēgas:\n1) 'answer' ar iespējamām vērtībām:\n   -\
+    \ 'jā': ja lietotāja apgalvojums ir pilnībā apstiprināts kontekstā, un ir skaidri\
+    \ norādīti apstākļi, kas atbilst apgalvojumam.\n   - 'nē': ja lietotāja apgalvojums\
+    \ ir pilnībā noraidīts kontekstā, un ir skaidri norādīti apstākļi, kas pierāda\
+    \ pretējo.\n   - 'n/a': ja kontekstā nav absolūti nekādas informācijas, kas ļautu\
+    \ apstiprināt vai noraidīt lietotāja apgalvojumu.\n\n2) 'rate' - pārliecību par\
+    \ atbildi skalā:\n   - 'zema': ja konteksts ir neskaidrs vai nepilnīgs, un atbilde\
+    \ balstās uz pieņēmumiem.\n   - 'vidēja': ja konteksts satur daļēju informāciju,\
+    \ bet nav pilnīgi skaidrs.\n   - 'augsta': ja konteksts satur skaidru un nepārprotamu\
+    \ informāciju, kas ļauj sniegt precīzu atbildi.\n\n3) 'explanation' - fragments\
+    \ no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrojums, kāda informācija\
+    \ ir nepieciešama, lai atbildētu.\n\nPapildus norādījumi:\n- Ja kontekstā ir minēts,\
+    \ ka piegādātājs, tā darbinieks vai piedāvājumā norādītā persona, kas piedalījusies\
+    \ iepriekšējos iepirkuma projekta posmos vai dokumentu izstrādē, netiek automātiski\
+    \ noraidīta, un ir norādīts, ka šādam piegādātājam ir iespēja pierādīt, ka minētie\
+    \ apstākļi nedod priekšrocības, atbildei jābūt 'jā'.\n- Ja kontekstā ir skaidri\
+    \ norādīts, ka piegādātājs tiek automātiski noraidīts šādos apstākļos, atbildei\
+    \ jābūt 'nē'.\n- Ja kontekstā nav informācijas par piegādātāju, tā darbinieku\
+    \ vai piedāvājumā norādīto personu dalību iepriekšējos iepirkuma projekta posmos\
+    \ vai dokumentu izstrādē, vai nav skaidri norādīts, vai šādi apstākļi automātiski\
+    \ izslēdz piegādātāju no dalības iepirkumā, atbildei jābūt 'n/a'.\n\nPiemērs atbildes\
+    \ formātam:\n```json\n{\n  \"answer\": \"jā\",\n  \"rate\": \"augsta\",\n  \"\
+    explanation\": \"Kontekstā ir skaidri norādīts, ka piegādātājs netiek automātiski\
+    \ noraidīts, ja tas ir piedalījies iepriekšējos iepirkuma projekta posmos vai\
+    \ dokumentu izstrādē, un tam ir iespēja pierādīt, ka šie apstākļi nedod priekšrocības.\"\
+    \n}"
+- id: p_for_39_4
+  prompt: "Kontekstā ir fragmenti no nolikuma. \nNoskaidro, vai lietotāja apgalvojums\
+    \   ir patiess, balstoties uz informāciju kontekstā. \nSpriešanai izmanto izvilkumus\
+    \   no likumiem, ja tādi ir doti. \n\n**Nosacījumi atbildes formulēšanai:**\n\
+    1.   **\"Jā\" gadījums:** Atbildi \"jā\", ja kontekstā skaidri norādīts, ka kvalifikācijas\
+    \   prasības neattiecas uz visām iesaistītajām personām (t.sk. apakšuzņēmējiem,\
+    \   piegādātāju apvienības dalībniekiem vai personām, uz kuru iespējām pretendents\
+    \   balstās). Piemēram, ja nolikumā teikts, ka konkrētas prasības attiecas tikai\
+    \   uz noteiktām personām vai situācijām.\n2. **\"Nē\" gadījums:** Atbildi \"\
+    nē\" , ja kontekstā skaidri norādīts, ka kvalifikācijas prasības attiecas uz visām\
+    \   iesaistītajām personām. Piemēram, ja nolikumā teikts, ka \"visas kvalifikācijas\
+    \   prasības\" vai \"konkrētas kvalifikācijas prasības\" attiecas uz apakšuzņēmējiem,\
+    \   piegādātāju apvienības dalībniekiem un personām, uz kuru iespējām pretendents\
+    \   balstās.\n3. **\"N/A\" gadījums:** Atbildi \"kontekstā nav informācijas\"\
+    , ja   kontekstā nav pietiekamas informācijas, lai noteiktu, vai apgalvojums ir\
+    \ patiess   vai nepaties. Piemēram, ja nolikumā nav skaidri definēts, uz kurām\
+    \ personām   attiecas kvalifikācijas prasības.\n\n**Atgriez rezultātu JSON formātā,\
+    \ ietverot   atslēgas:**\n1) 'answer' ar iespējamām vērtībām 'jā', 'nē', vai 'kontekstā\
+    \ nav   informācijas'; \n2) 'rate' - pārliecību par atbildi skalā 'zema', 'vidēja',\
+    \   'augsta'; \n3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai\
+    \ 'nē'   atbildi, vai paskaidrojums, kāda informācija ir nepieciešama, lai atbildētu.\n\
+    \  \n**Piemēri:**\n- Ja nolikumā teikts: \"Prasība attiecas uz visiem piegādātāju\
+    \   apvienības dalībniekiem un apakšuzņēmējiem,\" tad apgalvojums, ka prasības\
+    \ neattiecas   uz visām personām, ir nepaties (\"nē\").\n- Ja nolikumā teikts:\
+    \ \"Konkrētas   prasības attiecas tikai uz personām, kas veiks būvdarbus,\" tad\
+    \ apgalvojums,   ka prasības neattiecas uz visām personām, ir patiess (\"jā\"\
+    ).\n- Ja nolikumā   nav informācijas par to, uz kurām personām attiecas prasības,\
+    \ atbilde ir \" kontekstā nav informācijas.\"\n\nVienmēr analizē visu kontekstu\
+    \ kopumā, nevis   tikai atsevišķus punktus."
+- id: p_for_39_33
+  prompt: "Kontekstā ir fragmenti no nolikuma.\n\nNoskaidro, vai lietotāja apgalvojums\
+    \ ir patiess, balstoties uz informāciju kontekstā. Spriešanai izmanto izvilkumus\
+    \ no likumiem, ja tādi ir doti.\n\nNosacījumi atbildēm:\n1. Atbildi \"jā\", ja\
+    \ kontekstā ir skaidri norādītas prasības par piegādātāja saimniecisko un finansiālo\
+    \ stāvokli, piemēram:\n   - Apgrozījums (piemēram, noteikts minimālais apgrozījuma\
+    \ līmenis);\n   - Finanšu resursi (piemēram, prasība apliecināt pieejamos finanšu\
+    \ līdzekļus);\n   - Likviditāte (piemēram, noteikts minimālais likviditātes rādītājs).\n\
+    2. Atbildi \"nē\", ja kontekstā ir prasības, kas nav tieši saistītas ar piegādātāja\
+    \ saimniecisko un finansiālo stāvokli, piemēram:\n   - Piedāvājuma nodrošinājums;\n\
+    \   - Līguma izpildes nodrošinājums;\n   - Tehniskās un profesionālās prasības.\n\
+    3. Atbildi \"n/a\", ja kontekstā vispār nav prasību par piegādātāja saimniecisko\
+    \ un finansiālo stāvokli.\n\nPārmērīguma izvērtēšana:\n- Ja kontekstā ir prasības\
+    \ par piegādātāja saimniecisko un finansiālo stāvokli, izvērtē, vai tās varētu\
+    \ būt pārmērīgas vai nesamērīgas. Pārmērīguma izvērtēšanai ņem vērā:\n   - Informāciju\
+    \ par priekšapmaksu, starpmaksājumiem vai citiem atvieglojumiem, ja tādi ir minēti\
+    \ kontekstā;\n   - Prasību samērību attiecībā pret iepirkuma apjomu un paredzētajiem\
+    \ maksājumu nosacījumiem.\n- Ja kontekstā nav informācijas par priekšapmaksu vai\
+    \ starpmaksājumiem, pārmērīguma izvērtēšanu nevar veikt.\n\nVienmēr atgriez rezultātu\
+    \ JSON formātā, ietverot atslēgas:\n1) 'answer' ar iespējamām vērtībām 'jā', 'nē',\
+    \ vai 'n/a';\n2) 'rate' - pārliecību par atbildi skalā 'zema', 'vidēja', 'augsta';\n\
+    3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai\
+    \ paskaidrojums, kāda informācija ir nepieciešama, lai atbildētu.\n\nJautājums,\
+    \ kas LLM tiek dots kopā ar uzvedni:\nVai iepirkuma dokumentācijā ir noteiktas\
+    \ prasības attiecībā uz piegādātāja saimniecisko un finansiālo stāvokli (piemēram,\
+    \ prasības par apgrozījumu, finanšu resursiem vai likviditāti)? Ja šādas prasības\
+    \ ir noteiktas, izvērtē, vai kontekstā ir norādes, ka tās varētu būt pārmērīgas\
+    \ vai nesamērīgas (piemēram, ļoti augstas prasības situācijā, kad paredzēta priekšapmaksa\
+    \ vai starpmaksājumi). Ja šādas prasības vispār nav noteiktas, atbildi “n/a”."
+- id: p_for_35_7
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma.\n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām:\n   - 'jā'\
+    \ — ja nolikumā ir paredzēts piedāvājuma nodrošinājums, bet nav noteikta obligāta\
+    \ veidlapa (arī ja ir pievienots paraugs bez norādes, ka tas obligāti jāizmanto);\n\
+    \   - 'nē' — ja nolikumā ir skaidri noteikta obligāta piedāvājuma nodrošinājuma\
+    \ veidlapa;\n   - 'n/a' — ja nolikumā piedāvājuma nodrošinājums nav paredzēts\
+    \ vispār;\n   - 'kontekstā nav informācijas' — ja kontekstā nav pietiekamas informācijas,\
+    \ lai atbildētu.\n\n2) 'rate' — pārliecību par atbildi skalā 'zema', 'vidēja',\
+    \ 'augsta'.\n\n3) 'explanation' — fragments no konteksta, kas pamato 'jā' vai\
+    \ 'nē' atbildi, vai paskaidrojums, kāda informācija ir nepieciešama, lai atbildētu.\
+    \ Ja atbilde ir 'n/a', paskaidro, ka piedāvājuma nodrošinājums nav paredzēts nolikumā.\n\
+    \n**Svarīgi nosacījumi:**\n- Ja nolikumā nav minēts piedāvājuma nodrošinājums,\
+    \ atbildei jābūt 'n/a'.\n- Ja nolikumā ir minēts piedāvājuma nodrošinājums, bet\
+    \ nav noteikta obligāta veidlapa, atbildei jābūt 'jā'.\n- Ja nolikumā ir skaidri\
+    \ noteikta obligāta piedāvājuma nodrošinājuma veidlapa, atbildei jābūt 'nē'.\n\
+    - Ignorē informāciju, kas nav tieši saistīta ar piedāvājuma nodrošinājumu.\n\n\
+    **Piemēri:**\n1. Ja nolikumā ir teikts: \"Pretendentam jāiesniedz piedāvājuma\
+    \ nodrošinājums, izmantojot pievienoto veidlapu\", atbilde ir 'nē'.\n2. Ja nolikumā\
+    \ ir teikts: \"Pretendentam jāiesniedz piedāvājuma nodrošinājums, bet veidlapa\
+    \ nav obligāta\", atbilde ir 'jā'.\n3. Ja nolikumā nav minēts piedāvājuma nodrošinājums,\
+    \ atbilde ir 'n/a'.\n4. Ja kontekstā nav informācijas par piedāvājuma nodrošinājumu,\
+    \ atbilde ir 'kontekstā nav informācijas'.\n\nAtgriez atbildi šādā formātā:\n\
+    ```json\n{\n  \"answer\": \"<jā/nē/n/a/kontekstā nav informācijas>\",\n  \"rate\"\
+    : \"<zema/vidēja/augsta>\",\n  \"explanation\": \"<pamatojums>\"\n}\n```"
+- id: p_for_39_1
+  prompt: "Kontekstā ir fragmenti no iepirkuma nolikuma un attiecīgie likuma izvilkumi.\n\
+    \nTavs uzdevums ir noskaidrot, vai lietotāja apgalvojums ir patiess, balstoties\
+    \ uz informāciju kontekstā. \nSpriešanai izmanto gan nolikuma fragmentus, gan\
+    \ likuma izvilkumus, ja tie ir doti.\n\n**Svarīgi nosacījumi:**\n1. Diskriminējošas\
+    \ prasības var būt gan tiešas (piemēram, prasības par nacionalitāti), gan netiešas\
+    \ (piemēram, prasības par pieredzi konkrētā teritorijā, kas var radīt netiešu\
+    \ diskrimināciju).\n2. Prasības par pieredzi konkrētā teritorijā vienmēr jāuzskata\
+    \ par potenciāli diskriminējošām, ja vien kontekstā nav skaidri norādīts, ka tās\
+    \ ir objektīvas un samērīgas. Šādas prasības jāanalizē īpaši rūpīgi, pat ja tās\
+    \ šķiet tehniskas vai profesionālas.\n3. Ja kontekstā nav pietiekamas informācijas,\
+    \ lai sniegtu skaidru atbildi, norādi, kāda papildus informācija būtu nepieciešama,\
+    \ lai pieņemtu lēmumu. Šādos gadījumos atgriez \"n/a\".\n4. Likuma izvilkumi jāizmanto\
+    \ tikai tad, ja tie tieši atbalsta vai atspēko konteksta prasības. Pretrunu gadījumā\
+    \ prioritāte ir konteksta analīzei.\n\n**Atgriez rezultātu vienmēr JSON formātā\
+    \ ar šādām atslēgām**:\n- 'answer': iespējamās vērtības ir 'jā', 'nē' vai 'n/a'.\n\
+    - 'rate': pārliecību par atbildi skalā 'zema', 'vidēja', 'augsta'.\n- 'explanation':\
+    \ fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi, vai paskaidrojums,\
+    \ kāda informācija ir nepieciešama, lai atbildētu.\n\n**Papildus norādījumi:**\n\
+    - Ja kontekstā ir prasības, kas var radīt netiešu diskrimināciju (piemēram, pieredze\
+    \ konkrētā teritorijā), tās jāuzskata par diskriminējošām, ja vien nav skaidri\
+    \ pamatotas kā objektīvas un samērīgas.\n- Ja likuma izvilkumi skaidri norāda,\
+    \ ka prasības ir objektīvas un samērīgas, bet konteksts satur pretrunīgas prasības,\
+    \ prioritāte ir konteksta analīzei.\n- Ja kontekstā ir prasības, kas varētu būt\
+    \ diskriminējošas, bet nav pietiekamas informācijas, lai tās izvērtētu, norādi,\
+    \ kāda papildus informācija būtu nepieciešama.\n\n**Nosacījumi atbildēm:**\n-\
+    \ **\"jā\"**: Ja kontekstā ir prasības, kas tieši vai netieši diskriminē (piemēram,\
+    \ nacionalitāte, ģeogrāfiskais izvietojums, pieredze konkrētā teritorijā), un\
+    \ tās nav skaidri pamatotas kā objektīvas un samērīgas.\n- **\"nē\"**: Ja kontekstā\
+    \ nav prasību, kas tieši vai netieši diskriminē, un visas prasības ir skaidri\
+    \ pamatotas kā objektīvas un samērīgas.\n- **\"n/a\"**: Ja kontekstā nav pietiekamas\
+    \ informācijas, lai sniegtu skaidru atbildi, un nepieciešama papildus informācija.\n\
+    \nPiemērs:\nJautājums: Ir norādītas diskriminējošas prasības, piemēram, pretendentu\
+    \ nacionalitāte, ģeogrāfiskais izvietojums, pieredze konkrētā teritorijā.\n\n\
+    Atbilde:\n```json\n{\n  \"answer\": \"jā\",\n  \"rate\": \"augsta\",\n  \"explanation\"\
+    : \"Kontekstā ir prasība, ka pretendents var piedalīties tikai tad, ja tam ir\
+    \ pieredze konkrētā teritorijā, kas netieši diskriminē pretendentus no citām teritorijām.\"\
+    \n}\n```"
+- id: p_for_39_25_v2
+  prompt: "Kontekstā ir fragmenti no nolikuma.  \nAtbildi uz lietotāja jautājumu,\
+    \ balstoties uz informāciju kontekstā.  \nSeko lietotāja instrukcijām.  \nSpriešanai\
+    \ izmanto izvilkumus no likumiem, ja tādi ir doti.  \n\nVienmēr atgriez rezultātu\
+    \ JSON formātā, ietverot atslēgas:  \n1) 'answer' ar iespējamām vērtībām:  \n\
+    \   - 'jā', ja kontekstā ir skaidri norādīta prasība par konkrētu gadu pieredzi\
+    \ attiecīgajā jomā (tieši vai netieši, piemēram, pieredze noteiktā laika periodā).\
+    \  \n   - 'nē', ja kontekstā skaidri norādīts, ka prasība par pieredzi attiecas\
+    \ tikai uz konkrētu skaitu objektu, un nav prasības par konkrētu gadu pieredzi.\
+    \  \n   - 'kontekstā nav informācijas', ja konteksts ir nepilnīgs, neskaidrs vai\
+    \ tajā nav informācijas par prasībām attiecībā uz pieredzi.  \n\n2) 'rate' - pārliecību\
+    \ par atbildi skalā:  \n   - 'augsta', ja kontekstā ir skaidri norādīta informācija,\
+    \ kas atbilst jautājumam.  \n   - 'vidēja', ja kontekstā ir netieša informācija,\
+    \ kas ļauj izdarīt secinājumu, bet pastāv interpretācijas iespējas.  \n   - 'zema',\
+    \ ja konteksts ir neskaidrs vai nepilnīgs, bet ir iespējams izdarīt pieņēmumu.\
+    \  \n\n3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē' atbildi,\
+    \ vai paskaidrojums, kāda informācija ir nepieciešama, lai atbildētu.  \n\nPapildus\
+    \ vadlīnijas:  \n- Ja kontekstā ir prasība par pieredzi noteiktā laika periodā\
+    \ (piemēram, pēdējo 3 gadu laikā), tā jāinterpretē kā prasība par konkrētu gadu\
+    \ pieredzi.  \n- Ja konteksts ir neskaidrs vai nepilnīgs, skaidri norādi, ka nepieciešama\
+    \ papildu informācija, lai sniegtu precīzu atbildi.  \n- Ja kontekstā ir pretrunīga\
+    \ informācija, norādi to 'explanation' laukā un atgriez 'kontekstā nav informācijas'."
+- id: p_for_39_36
+  prompt: "Noskaidro, vai lietotāja apgalvojums ir patiess, balstoties uz informāciju\
+    \ kontekstā, kurā ir fragmenti no nolikuma.\n\nVienmēr atgriez rezultātu JSON\
+    \ formātā, ietverot atslēgas: \n1) 'answer' ar iespējamām vērtībām 'jā', 'nē',\
+    \ 'n/a' - ja šis ir pakalpojumu vai piegādes līgums nevis būvdarbu līgums, vai\
+    \ 'kontekstā nav informācijas'; \n2) 'rate' - pārliecību par atbildi skalā 'zema',\
+    \ 'vidēja', 'augsta'; \n3) 'explanation' - fragments no konteksta, kas pamato\
+    \ 'jā' vai 'nē' atbildi, vai paskaidrojums, kāda informācija ir nepieciešama,\
+    \ lai atbildētu.\n\n**Nosacījumi atbildēm**:\n- Atbildi \"n/a\", ja:\n  - Kontekstā\
+    \ nav prasīta informācija par pretendenta vēsturisko finanšu pārskatu, kuru veido\
+    \ bilance, peļņas vai zaudējumu aprēķins, naudas plūsmas pārskats un pašu kapitāla\
+    \ izmaiņu pārskats.\n  - Skaidri norādīts, ka finanšu dokumenti nav attiecināmi\
+    \ uz konkrēto iepirkumu.\n- Atbildi \"jā\", ja:\n  - Kontekstā ir prasība iesniegt\
+    \ finanšu dokumentus, bet nav prasīts, ka tiem jābūt auditētiem.\n- Atbildi \"\
+    nē\", ja:\n  - Auditēts finanšu pārskats ir vienīgā pieļaujamā iespēja, un kontekstā\
+    \ nav norādīts, ka pretendents to var iesniegt.\n\n**Papildu prasības skaidrojumam**:\n\
+    - Ja atbilde ir \"jā\" vai \"nē\", skaidrojumā jānorāda, vai dokumenti ir auditēti\
+    \ vai nav, un kā tas ietekmē atbildi.\n- Ja atbilde ir \"n/a\", skaidrojumā jānorāda,\
+    \ kāda informācija trūkst vai kāpēc dokumenti nav attiecināmi.\n\n**Piemēri**:\n\
+    1. Ja kontekstā ir prasība iesniegt gada vidējo finanšu apgrozījumu, bet nav prasīts,\
+    \ ka tas jābūt auditētam, atbildi \"jā\".\n2. Ja kontekstā ir prasība iesniegt\
+    \ tikai auditētu finanšu pārskatu, un pretendents to nevar nodrošināt, atbildi\
+    \ \"nē\".\n3. Ja kontekstā nav minēti finanšu dokumenti, atbildi \"n/a\"."
+- id: p_for_41
+  prompt: "Kontekstā ir fragmenti no nolikuma. \nNoskaidro, vai lietotāja apgalvojums\
+    \ ir patiess, balstoties uz informāciju kontekstā. \nSpriešanai izmanto izvilkumus\
+    \ no likumiem, ja tādi ir doti. \n\nAtbildi vienmēr atgriez JSON formātā, ietverot\
+    \ šādas atslēgas: \n1) 'answer' ar iespējamām vērtībām 'jā', 'nē', vai 'kontekstā\
+    \ nav informācijas'; \n2) 'rate' - pārliecību par atbildi skalā 'zema', 'vidēja',\
+    \ 'augsta'; \n3) 'explanation' - fragments no konteksta, kas pamato 'jā' vai 'nē'\
+    \ atbildi, vai paskaidrojums, kāda informācija ir nepieciešama, lai atbildētu.\n\
+    \nNosacījumi:\n- Atbilde ir 'jā', ja kontekstā skaidri norādīts, ka kvalifikācija\
+    \ un pieredze netiek izmantota piedāvājuma izvērtēšanas kritērijos, bet tiek pārbaudīta\
+    \ kvalifikācijas prasību ietvaros.\n- Atbilde ir 'nē', ja kontekstā skaidri norādīts,\
+    \ ka kvalifikācija un pieredze tiek izmantota piedāvājuma izvērtēšanas kritērijos,\
+    \ piešķirot vērtēšanas punktus.\n- Atbilde ir 'kontekstā nav informācijas', ja\
+    \ kontekstā nav pietiekamas informācijas, lai noteiktu, vai kvalifikācija un pieredze\
+    \ tiek izmantota piedāvājuma izvērtēšanas kritērijos.\n\nPiemēri:\n1. Ja kontekstā\
+    \ teikts: \"Pretendenta kvalifikācija tiek pārbaudīta tikai kvalifikācijas prasību\
+    \ ietvaros, bet netiek izmantota piedāvājuma vērtēšanas kritērijos,\" atbilde\
+    \ ir:\n```json\n{\n  \"answer\": \"jā\",\n  \"rate\": \"augsta\",\n  \"explanation\"\
+    : \"Kontekstā skaidri norādīts, ka kvalifikācija un pieredze netiek izmantota\
+    \ piedāvājuma vērtēšanas kritērijos.\"\n}\n```\n\n2. Ja kontekstā teikts: \"Pretendenta\
+    \ kvalifikācija tiek vērtēta piedāvājuma izvērtēšanas procesā, piešķirot punktus\
+    \ par pieredzi,\" atbilde ir:\n```json\n{\n  \"answer\": \"nē\",\n  \"rate\":\
+    \ \"augsta\",\n  \"explanation\": \"Kontekstā skaidri norādīts, ka kvalifikācija\
+    \ un pieredze tiek izmantota piedāvājuma vērtēšanas kritērijos.\"\n}\n```\n\n\
+    3. Ja kontekstā nav informācijas par to, vai kvalifikācija un pieredze tiek izmantota\
+    \ piedāvājuma vērtēšanas kritērijos, atbilde ir:\n```json\n{\n  \"answer\": \"\
+    kontekstā nav informācijas\",\n  \"rate\": \"zema\",\n  \"explanation\": \"Kontekstā\
+    \ nav pietiekamas informācijas, lai noteiktu, vai kvalifikācija un pieredze tiek\
+    \ izmantota piedāvājuma vērtēšanas kritērijos.\"\n}\n```"
+- id: p_for_44
+  prompt: 'Kontekstā ir fragmenti no nolikuma. Atbildi uz lietotāja jautājumu, balstoties
+    uz informāciju kontekstā. Seko lietotāja instrukcijām. Spriešanai izmanto izvilkumus
+    no likumiem, ja tādi ir doti.
 
 
+    Vienmēr atgriez rezultātu JSON formātā, ietverot atslēgas:
 
+    1) ''answer'' ar iespējamām vērtībām ''jā'', ''nē'', vai ''kontekstā nav informācijas'';
+
+    2) ''rate'' - pārliecību par atbildi skalā ''zema'', ''vidēja'', ''augsta'';
+
+    3) ''explanation'' - fragments no konteksta, kas pamato ''jā'' vai ''nē'' atbildi,
+    vai paskaidrojums, kāda informācija ir nepieciešama, lai atbildētu.
+
+
+    Nosacījumi:
+
+    - Atbildi ar ''jā'', ja kontekstā skaidri norādīts, ka tehniskā specifikācija
+    ir detalizēta un citi kritēriji nav būtiski piedāvājuma izvēlē. Pat ja tiek pieminēti
+    citi kritēriji, tie nedrīkst būt būtiski.
+
+    - Atbildi ar ''nē'', ja kontekstā skaidri norādīts, ka citi kritēriji, piemēram,
+    cena vai piedāvājuma noformējums, ir būtiski piedāvājuma izvēlē.
+
+    - Atbildi ar ''kontekstā nav informācijas'', ja nav skaidri norādīts, ka tehniskā
+    specifikācija ir detalizēta vai citi kritēriji nav būtiski.
+
+
+    Piemēri:
+
+    1. Ja kontekstā ir norādīts, ka piedāvājuma izvēles kritērijs ir "viszemākā cena",
+    bet tehniskā specifikācija ir detalizēta, atbilde ir ''jā''.
+
+    2. Ja kontekstā ir norādīts, ka piedāvājuma izvēle notiek, vērtējot vairākus kritērijus,
+    piemēram, cenu, tehnisko atbilstību un noformējumu, atbilde ir ''nē''.
+
+    3. Ja kontekstā nav skaidri norādīts, ka tehniskā specifikācija ir detalizēta
+    vai citi kritēriji nav būtiski, atbilde ir ''kontekstā nav informācijas''.
+
+
+    Jautājums, kas LLM tiek dots kopā ar uzvedni:
+
+    Vai sagatavotā tehniskā specifikācija ir detalizēta un citiem kritērijiem nav
+    būtiskas nozīmes piedāvājuma izvēlē? Atbildi ar ''jā'', ja sagatavotā tehniskā
+    specifikācija ir detalizēta un citiem kritērijiem nav būtiskas nozīmes piedāvājuma
+    izvēlē, ''nē'' - ja ir kā citādi.'
+- id: p_for_39_20
+  prompt: "Kontekstā ir fragmenti no nolikuma. \nNoskaidro, vai lietotāja apgalvojums\
+    \ ir patiess, balstoties uz informāciju kontekstā. \nSpriešanai izmanto izvilkumus\
+    \ no likumiem, ja tādi ir doti. \n\nAtbildi vienmēr atgriez JSON formātā, ietverot\
+    \ šādas atslēgas: \n1) 'answer' ar iespējamām vērtībām: \n   - 'jā', ja apgalvojums\
+    \ ir pilnībā apstiprināts kontekstā;\n   - 'nē', ja apgalvojums ir pilnībā noraidīts\
+    \ kontekstā vai ja kontekstā nav pietiekamas informācijas, lai apstiprinātu vai\
+    \  noraidītu apgalvojumu.\n2) 'rate' - pārliecību par atbildi skalā: 'zema', 'vidēja',\
+    \ 'augsta'. \n   - 'augsta', ja kontekstā ir skaidri un nepārprotami norādīta\
+    \ informācija, kas pamato atbildi;\n   - 'vidēja', ja kontekstā ir daļēja informācija,\
+    \ kas ļauj izdarīt secinājumu, bet nav pilnīgi skaidra;\n   - 'zema', ja kontekstā\
+    \ ir neskaidra vai nepilnīga informācija.\n3) 'explanation' - fragments no konteksta,\
+    \ kas pamato 'jā' vai 'nē' atbildi, vai paskaidrojums, kāda informācija ir nepieciešama,\
+    \ lai atbildētu."
