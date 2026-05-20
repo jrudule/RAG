@@ -12,7 +12,7 @@ Bakalaura darbā ir izstrādāts automatizēts uzvedņu (*prompts*) optimizācij
 ```
 - **`PromptOptimizer.ipynb`** — interaktīvs prototips Jupyter Notebook formātā uzvedņu optimizācijai. Atbilst bakalaura darba 5.2. nodaļā aprakstītajam interaktīvajam prototipam.
 - **`ProjectProcurementReview.ipynb`** - akurātuma novērtēšanas un atskaišu ģenerēšanas piezīmjgrāmata izstrādes un validācijas kopām.
-- **`questions/`** — pārbaudes lapu jautājumi un uzvednes YAML formātā.
+- **`questions/`** — mape ar pārbaudes lapu jautājumu un uzvednes failiem YAML formātā.
 
 ## Papildus informācija
 
