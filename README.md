@@ -1,8 +1,12 @@
 # Izguves papildinātas ģenerēšanas metodes dokumentu atbilstības pārbaudei
 
-Šis repozitorijs satur bakalaura darba **"Izguves papildinātas ģenerēšanas metodes dokumentu atbilstības pārbaudei"** praktisko daļu.
+Šis repozitorijs, papildus VPP-CFLA projektā izveidotajam, satur bakalaura darba **"Izguves papildinātas ģenerēšanas metodes dokumentu atbilstības pārbaudei"** praktisko daļu.
 
-Bakalaura darbā ir izstrādāts automatizēts uzvedņu (*prompts*) optimizācijas risinājums, kas iteratīvi uzlabo lielo valodas modeļu (LLM) atbilžu akurātumu Centrālās finanšu un līgumu aģentūras (CFLA) iepirkumu pārbaudes jautājumiem nolieguma formā. Risinājums izmanto pašu LLM kā uzvedņu inženieri, kas analizē kļūdainās atbildes un ģenerē uzlabotas kandidātuzvednes.
+Bakalaura darbā ir izstrādāts automatizēts uzvedņu (*angliski - prompts*) optimizācijas risinājums, kas iteratīvi uzlabo lielo valodas modeļu (LLM) atbilžu akurātumu Centrālās finanšu un līgumu aģentūras (CFLA) iepirkumu pārbaudes jautājumiem nolieguma formā. Risinājums izmanto pašu LLM kā uzvedņu inženieri, kas analizē kļūdainās atbildes un ģenerē uzlabotas kandidātuzvednes.
+
+## VPP-CFLA projekts
+
+Šis repozitorijs ir sazarojums (*angliski - fork*) no [VPP-CFLA projekta prototipa](https://github.com/raivisskadins/vpp-cfla), kuru izstrādājusi VPP-CFLA projekta komanda, kurā piedalījusies arī šī bakalaura darba autore. Tas ir papildināts ar uzvedņu automatizētas optimizācijas funkcionalitāti, kas izstrādāta bakalaura darba ietvaros.
 
 ## Galvenie risinājuma faili
 
@@ -14,6 +18,6 @@ Bakalaura darbā ir izstrādāts automatizēts uzvedņu (*prompts*) optimizācij
 - **`ProjectProcurementReview.ipynb`** - akurātuma novērtēšanas un atskaišu ģenerēšanas piezīmjgrāmata izstrādes un validācijas kopām.
 - **`questions/`** — mape ar pārbaudes lapu jautājumu un uzvednes failiem YAML formātā.
 
-## Papildus informācija
+## Papildu informācija
 
 Detalizēta uzstādīšanas un lietošanas instrukcija pieejama failā [USAGE.md](USAGE.md).
